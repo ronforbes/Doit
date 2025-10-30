@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeAlign - Design Mockups</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            border: 12px solid #1f2937;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #1f2937;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+        .desktop-frame {
+            width: 1200px;
+            height: 800px;
+            border: 8px solid #374151;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        .mockup-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .tab-button {
+            padding: 12px 24px;
+            cursor: pointer;
+            border: none;
+            background: white;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .tab-button.active {
+            background: #3b82f6;
+            color: white;
+        }
+        .mockup-view {
+            display: none;
+        }
+        .mockup-view.active {
+            display: flex;
+        }
+        .objective-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+        .task-checkbox.checked {
+            background: #10b981;
+            border-color: #10b981;
+            position: relative;
+        }
+        .task-checkbox.checked::after {
+            content: '✓';
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+        }
+        .fab {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #3b82f6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+            font-size: 24px;
+        }
+        .swipe-hint {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 60px;
+            background: linear-gradient(to left, rgba(239, 68, 68, 0.1), transparent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ef4444;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Tabs -->
+    <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <div style="max-width: 1400px; margin: 0 auto; display: flex; gap: 4px; padding: 8px;">
+            <button class="tab-button active" onclick="showMockup('mobile-today')">Mobile - Today</button>
+            <button class="tab-button" onclick="showMockup('mobile-objectives')">Mobile - Objectives</button>
+            <button class="tab-button" onclick="showMockup('mobile-inbox')">Mobile - Inbox</button>
+            <button class="tab-button" onclick="showMockup('desktop-today')">Desktop - Today</button>
+            <button class="tab-button" onclick="showMockup('desktop-objectives')">Desktop - Objectives</button>
+            <button class="tab-button" onclick="showMockup('desktop-all')">Desktop - All Tasks</button>
+        </div>
+    </div>
+
+    <div style="margin-top: 60px;">
+        <!-- Mobile - Today View -->
+        <div id="mobile-today" class="mockup-view active mockup-container">
+            <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div style="background: #f9fafb; height: 100%; overflow-y: auto; padding-top: 30px;">
+                    <!-- Status Bar -->
+                    <div style="padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #6b7280;">
+                        <span>9:41</span>
+                        <span>●●●●</span>
+                    </div>
+
+                    <!-- Header -->
+                    <div style="padding: 20px 20px 16px;">
+                        <h1 style="font-size: 28px; font-weight: 700; color: #111827; margin-bottom: 4px;">Today</h1>
+                        <p style="font-size: 14px; color: #6b7280;">Thursday, October 30</p>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div style="padding: 0 20px 16px;">
+                        <div style="background: white; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 14px; color: #6b7280;">Completed today</span>
+                                <span style="font-size: 24px; font-weight: 700; color: #10b981;">3</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Add -->
+                    <div style="padding: 0 20px 16px;">
+                        <div style="background: white; border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <span style="color: #3b82f6; font-size: 20px;">+</span>
+                            <input type="text" placeholder="Add a task..." style="flex: 1; border: none; outline: none; font-size: 16px; color: #111827;">
+                        </div>
+                    </div>
+
+                    <!-- Tasks -->
+                    <div style="padding: 0 20px;">
+                        <!-- Overdue Section -->
+                        <div style="margin-bottom: 20px;">
+                            <h3 style="font-size: 12px; font-weight: 600; color: #ef4444; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">Overdue (1)</h3>
+
+                            <div style="background: white; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 3px solid #ef4444; position: relative;">
+                                <div style="display: flex; gap: 12px; align-items: start;">
+                                    <div class="task-checkbox"></div>
+                                    <div style="flex: 1;">
+                                        <div style="font-size: 16px; color: #111827; margin-bottom: 6px; font-weight: 500;">Review Q4 budget proposal</div>
+                                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                            <span class="objective-tag" style="background: #dbeafe; color: #1e40af;">Launch Product</span>
+                                            <span style="font-size: 13px; color: #ef4444;">Oct 28</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Due Today Section -->
+                        <div style="margin-bottom: 20px;">
+                            <h3 style="font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">Due Today (2)</h3>
+
+                            <div style="background: white; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 12px; border-left: 3px solid #3b82f6;">
+                                <div style="display: flex; gap: 12px; align-items: start;">
+                                    <div class="task-checkbox"></div>
+                                    <div style="flex: 1;">
+                                        <div style="font-size: 16px; color: #111827; margin-bottom: 6px;">Update team on project status</div>
+                                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                            <span class="objective-tag" style="background: #dbeafe; color: #1e40af;">Launch Product</span>
+                                            <span style="font-size: 13px; color: #6b7280;">Today</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="background: white; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 3px solid #10b981;">
+                                <div style="display: flex; gap: 12px; align-items: start;">
+                                    <div class="task-checkbox"></div>
+                                    <div style="flex: 1;">
+                                        <div style="font-size: 16px; color: #111827; margin-bottom: 6px;">Prepare slides for client meeting</div>
+                                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                            <span class="objective-tag" style="background: #d1fae5; color: #065f46;">Improve Health</span>
+                                            <span style="font-size: 13px; color: #6b7280;">Today</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- In Progress Section -->
+                        <div style="margin-bottom: 20px;">
+                            <h3 style="font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">In Progress (1)</h3>
+
+                            <div style="background: white; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 3px solid #8b5cf6;">
+                                <div style="display: flex; gap: 12px; align-items: start;">
+                                    <div class="task-checkbox"></div>
+                                    <div style="flex: 1;">
+                                        <div style="font-size: 16px; color: #111827; margin-bottom: 6px;">Design new landing page</div>
+                                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                            <span class="objective-tag" style="background: #ede9fe; color: #5b21b6;">Learn Design</span>
+                                            <span style="font-size: 13px; color: #3b82f6; font-weight: 600;">In Progress</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom spacing for nav -->
+                    <div style="height: 100px;"></div>
+
+                    <!-- Bottom Navigation -->
+                    <div style="position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid #e5e7eb; padding: 8px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05);">
+                        <div style="display: flex; justify-content: space-around; max-width: 375px; margin: 0 auto;">
+                            <div style="text-align: center; padding: 8px; color: #3b82f6;">
+                                <div style="font-size: 20px; margin-bottom: 4px;">📅</div>
+                                <div style="font-size: 11px; font-weight: 600;">Today</div>
+                            </div>
+                            <div style="text-align: center; padding: 8px; color: #9ca3af;">
+                                <div style="font-size: 20px; margin-bottom: 4px;">📋</div>
+                                <div style="font-size: 11px;">All</div>
+                            </div>
+                            <div style="text-align: center; padding: 8px; color: #9ca3af;">
+                                <div style="font-size: 20px; margin-bottom: 4px;">🎯</div>
+                                <div style="font-size: 11px;">Goals</div>
+                            </div>
+                            <div style="text-align: center; padding: 8px; color: #9ca3af;">
+                                <div style="font-size: 20px; margin-bottom: 4px;">📥</div>
+                                <div style="font-size: 11px;">Inbox</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile - Objectives View -->
+        <div id="mobile-objectives" class="mockup-view mockup-container">
+            <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div style="background: #f9fafb; height: 100%; overflow-y: auto; padding-top: 30px;">
+                    <!-- Status Bar -->
+                    <div style="padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #6b7280;">
+                        <span>9:41</span>
+                        <span>●●●●</span>
+                    </div>
+
+                    <!-- Header -->
+                    <div style="padding: 20px 20px 16px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                            <h1 style="font-size: 28px; font-weight: 700; color: #111827;">Objectives</h1>
+                            <button style="background: #3b82f6; color: white; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; border: none;">+</button>
+                        </div>
+                        <p style="font-size: 14px; color: #6b7280;">3 active objectives</p>
+                    </div>
+
+                    <!-- Objectives Grid -->
+                    <div style="padding: 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <!-- Objective Card 1 -->
+                        <div style="background: white; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-top: 4px solid #3b82f6;">
+                            <div style="margin-bottom: 12px;">
+                                <div style="font-size: 16px; font-weight: 600; color: #111827; margin-bottom: 8px;">Launch Product</div>
+                                <div style="font-size: 12px; color: #6b7280; margin-bottom: 8px;">Oct 1 - Dec 31</div>
+                            </div>
+                            <div style="margin-bottom: 8px;">
+                                <div style="display: flex; justify-content: space-between; font-size: 12px; color: #6b7280; margin-bottom: 4px;">
+                                    <span>Progress</span>
+                                    <span style="font-weight: 600; color: #3b82f6;">65%</span>
+                                </div>
+                                <div style="height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden;">
+                                    <div style="width: 65%; height: 100%; background: #3b82f6;"></div>
+                                </div>
+                            </div>
+                            <div style="font-size: 12px; color: #6b7280;">
+                                <span style="font-weight: 600; color: #111827;">8</span> tasks
+                            </div>
+                        </div>
+
+                        <!-- Objective Card 2 -->
+                        <div style="background: white; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-top: 4px solid #10b981;">
+                            <div style="margin-bottom: 12px;">
+                                <div style="font-size: 16px; font-weight: 600; color: #111827; margin-bottom: 8px;">Improve Health</div>
+                                <div style="font-size: 12px; color: #6b7280; margin-bottom: 8px;">Sep 15 - Nov 30</div>
+                            </div>
+                            <div style="margin-bottom: 8px;">
+                                <div style="display: flex; justify-content: space-between; font-size: 12px; color: #6b7280; margin-bottom: 4px;">
+                                    <span>Progress</span>
+                                    <span style="font-weight: 600; color: #10b981;">40%</span>
+                                </div>
+                                <div style="height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden;">
+                                    <div style="width: 40%; height: 100%; background: #10b981;"></div>
+                                </div>
+                            </div>
+                            <div style="font-size: 12px; color: #6b7280;">
+                                <span style="font-weight: 600; color: #111827;">5</span> tasks
+                            </div>
+                        </div>
+
+                        <!-- Objective Card 3 -->
+                        <div style="background: white; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-top: 4px solid #8b5cf6;">
+                            <div style="margin-bottom: 12px;">
+                                <div style="font-size: 16px; font-weight: 600; color: #111827; margin-bottom: 8px;">Learn Design</div>
+                                <div style="font-size: 12px; color: #6b7280; margin-bottom: 8px;">Oct 10 - Dec 15</div>
+                            </div>
+                            <div style="margin-bottom: 8px;">
+                                <div style="display: flex; justify-content: space-between; font-size: 12px; color: #6b7280; margin-bottom: 4px;">
+                                    <span>Progress</span>
+                                    <span style="font-weight: 600; color: #8b5cf6;">20%</span>
+                                </div>
+                                <div style="height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden;">
+                                    <div style="width: 20%; height: 100%; background: #8b5cf6;"></div>
+                                </div>
+                            </div>
+                            <div style="font-size: 12px; color: #6b7280;">
+                                <span style="font-weight: 600; color: #111827;">3</span> tasks
+                            </div>
+                        </div>
+
+                        <!-- Add New Card -->
+                        <div style="background: white; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 2px dashed #d1d5db; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 140px; cursor: pointer;">
+                            <div style="font-size: 32px; color: #9ca3af; margin-bottom: 8px;">+</div>
+                            <div style="font-size: 13px; color: #6b7280; text-align: center;">Add New Objective</div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom spacing -->
+                    <div style="height: 100px;"></div>
+
+                    <!-- Bottom Navigation -->
+                    <div style="position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid #e5e7eb; padding: 8px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05);">
+                        <div style="display: flex; justify-content: space-around; max-width: 375px; margin: 0 auto;">
+                            <div style="text-align: center; padding: 8px; color: #9ca3af;">
+                                <div style="font-size: 20px; margin-bottom: 4px;">📅</div>
+                                <div style="font-size: 11px;">Today</div>
+                            </div>
+                            <div style="text-align: center; padding: 8px; color: #9ca3af;">
+                                <div style="font-size: 20px; margin-bottom: 4px;">📋</div>
+                                <div style="font-size: 11px;">All</div>
+                            </div>
+                            <div style="text-align: center; padding: 8px; color: #3b82f6;">
+                                <div style="font-size: 20px; margin-bottom: 4px;">🎯</div>
+                                <div style="font-size: 11px; font-weight: 600;">Goals</div>
+                            </div>
+                            <div style="text-align: center; padding: 8px; color: #9ca3af;">
+                                <div style="font-size: 20px; margin-bottom: 4px;">📥</div>
+                                <div style="font-size: 11px;">Inbox</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile - Inbox View -->
+        <div id="mobile-inbox" class="mockup-view mockup-container">
+            <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div style="background: #f9fafb; height: 100%; overflow-y: auto; padding-top: 30px;">
+                    <!-- Status Bar -->
+                    <div style="padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #6b7280;">
+                        <span>9:41</span>
+                        <span>●●●●</span>
+                    </div>
+
+                    <!-- Header -->
+                    <div style="padding: 20px 20px 16px;">
+                        <h1 style="font-size: 28px; font-weight: 700; color: #111827; margin-bottom: 4px;">Inbox</h1>
+                        <p style="font-size: 14px; color: #6b7280;">Tasks without objectives</p>
+                    </div>
+
+                    <!-- Info Banner -->
+                    <div style="margin: 0 20px 20px; background: #eff6ff; border-radius: 12px; padding: 16px; border-left: 4px solid #3b82f6;">
+                        <div style="font-size: 14px; color: #1e40af; margin-bottom: 4px; font-weight: 600;">💡 Organize your tasks</div>
+                        <div style="font-size: 13px; color: #1e3a8a;">Link these tasks to objectives to track your progress better.</div>
+                    </div>
+
+                    <!-- Tasks -->
+                    <div style="padding: 0 20px;">
+                        <div style="background: white; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 12px;">
+                            <div style="display: flex; gap: 12px; align-items: start;">
+                                <div class="task-checkbox"></div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 16px; color: #111827; margin-bottom: 6px;">Call dentist for appointment</div>
+                                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                        <span style="font-size: 13px; color: #6b7280;">Tomorrow</span>
+                                    </div>
+                                </div>
+                                <button style="color: #3b82f6; font-size: 12px; padding: 6px 12px; background: #eff6ff; border-radius: 6px; border: none; font-weight: 600;">Link</button>
+                            </div>
+                        </div>
+
+                        <div style="background: white; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 12px;">
+                            <div style="display: flex; gap: 12px; align-items: start;">
+                                <div class="task-checkbox"></div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 16px; color: #111827; margin-bottom: 6px;">Buy groceries</div>
+                                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                        <span style="font-size: 13px; color: #6b7280;">No date</span>
+                                    </div>
+                                </div>
+                                <button style="color: #3b82f6; font-size: 12px; padding: 6px 12px; background: #eff6ff; border-radius: 6px; border: none; font-weight: 600;">Link</button>
+                            </div>
+                        </div>
+
+                        <div style="background: white; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 12px;">
+                            <div style="display: flex; gap: 12px; align-items: start;">
+                                <div class="task-checkbox"></div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 16px; color: #111827; margin-bottom: 6px;">Research vacation destinations</div>
+                                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                        <span style="font-size: 13px; color: #6b7280;">No date</span>
+                                    </div>
+                                </div>
+                                <button style="color: #3b82f6; font-size: 12px; padding: 6px 12px; background: #eff6ff; border-radius: 6px; border: none; font-weight: 600;">Link</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom spacing -->
+                    <div style="height: 100px;"></div>
+
+                    <!-- Bottom Navigation -->
+                    <div style="position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid #e5e7eb; padding: 8px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05);">
+                        <div style="display: flex; justify-content: space-around; max-width: 375px; margin: 0 auto;">
+                            <div style="text-align: center; padding: 8px; color: #9ca3af;">
+                                <div style="font-size: 20px; margin-bottom: 4px;">📅</div>
+                                <div style="font-size: 11px;">Today</div>
+                            </div>
+                            <div style="text-align: center; padding: 8px; color: #9ca3af;">
+                                <div style="font-size: 20px; margin-bottom: 4px;">📋</div>
+                                <div style="font-size: 11px;">All</div>
+                            </div>
+                            <div style="text-align: center; padding: 8px; color: #9ca3af;">
+                                <div style="font-size: 20px; margin-bottom: 4px;">🎯</div>
+                                <div style="font-size: 11px;">Goals</div>
+                            </div>
+                            <div style="text-align: center; padding: 8px; color: #3b82f6;">
+                                <div style="font-size: 20px; margin-bottom: 4px;">📥</div>
+                                <div style="font-size: 11px; font-weight: 600;">Inbox</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop - Today View -->
+        <div id="desktop-today" class="mockup-view mockup-container">
+            <div class="desktop-frame">
+                <div style="display: flex; height: 100%; background: #f9fafb;">
+                    <!-- Sidebar -->
+                    <div style="width: 280px; background: white; border-right: 1px solid #e5e7eb; display: flex; flex-direction: column;">
+                        <!-- Logo/Brand -->
+                        <div style="padding: 24px 20px; border-bottom: 1px solid #e5e7eb;">
+                            <div style="font-size: 24px; font-weight: 700; color: #111827;">LifeAlign</div>
+                        </div>
+
+                        <!-- Navigation -->
+                        <div style="padding: 16px 12px; flex: 1; overflow-y: auto;">
+                            <div style="margin-bottom: 20px;">
+                                <div style="padding: 10px 12px; background: #eff6ff; border-radius: 8px; color: #1e40af; font-weight: 600; margin-bottom: 4px; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+                                    <span>📅</span>
+                                    <span>Today</span>
+                                    <span style="margin-left: auto; background: #3b82f6; color: white; padding: 2px 8px; border-radius: 12px; font-size: 12px;">6</span>
+                                </div>
+                                <div style="padding: 10px 12px; color: #6b7280; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px;">
+                                    <span>📋</span>
+                                    <span>All Tasks</span>
+                                </div>
+                                <div style="padding: 10px 12px; color: #6b7280; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px;">
+                                    <span>📥</span>
+                                    <span>Inbox</span>
+                                    <span style="margin-left: auto; background: #e5e7eb; color: #6b7280; padding: 2px 8px; border-radius: 12px; font-size: 12px;">3</span>
+                                </div>
+                            </div>
+
+                            <!-- Objectives -->
+                            <div>
+                                <div style="padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Objectives</span>
+                                    <button style="color: #3b82f6; font-size: 16px; border: none; background: none; cursor: pointer; padding: 0; width: 20px; height: 20px;">+</button>
+                                </div>
+                                <div style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px; border-left: 3px solid #3b82f6; background: #f9fafb;">
+                                    <div style="width: 8px; height: 8px; background: #3b82f6; border-radius: 2px;"></div>
+                                    <span style="color: #111827; font-size: 14px;">Launch Product</span>
+                                    <span style="margin-left: auto; font-size: 12px; color: #6b7280;">8</span>
+                                </div>
+                                <div style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px;">
+                                    <div style="width: 8px; height: 8px; background: #10b981; border-radius: 2px;"></div>
+                                    <span style="color: #6b7280; font-size: 14px;">Improve Health</span>
+                                    <span style="margin-left: auto; font-size: 12px; color: #9ca3af;">5</span>
+                                </div>
+                                <div style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px;">
+                                    <div style="width: 8px; height: 8px; background: #8b5cf6; border-radius: 2px;"></div>
+                                    <span style="color: #6b7280; font-size: 14px;">Learn Design</span>
+                                    <span style="margin-left: auto; font-size: 12px; color: #9ca3af;">3</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- User Section -->
+                        <div style="padding: 16px; border-top: 1px solid #e5e7eb;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="width: 40px; height: 40px; background: #dbeafe; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #1e40af;">JD</div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 14px; font-weight: 600; color: #111827;">John Doe</div>
+                                    <div style="font-size: 12px; color: #6b7280;">Settings</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div style="flex: 1; overflow-y: auto; padding: 40px;">
+                        <!-- Header -->
+                        <div style="margin-bottom: 32px;">
+                            <h1 style="font-size: 36px; font-weight: 700; color: #111827; margin-bottom: 8px;">Today</h1>
+                            <div style="display: flex; gap: 24px; align-items: center;">
+                                <p style="font-size: 16px; color: #6b7280;">Thursday, October 30, 2025</p>
+                                <div style="padding: 8px 16px; background: #d1fae5; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px;">
+                                    <span style="color: #065f46; font-size: 14px; font-weight: 600;">3 completed today</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Add -->
+                        <div style="margin-bottom: 32px;">
+                            <div style="background: white; border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 2px solid transparent; transition: all 0.2s;">
+                                <span style="color: #3b82f6; font-size: 24px;">+</span>
+                                <input type="text" placeholder="Add a task... (Cmd+K)" style="flex: 1; border: none; outline: none; font-size: 16px; color: #111827;">
+                            </div>
+                        </div>
+
+                        <!-- Tasks -->
+                        <div>
+                            <!-- Overdue -->
+                            <div style="margin-bottom: 32px;">
+                                <h3 style="font-size: 13px; font-weight: 600; color: #ef4444; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;">Overdue (1)</h3>
+
+                                <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 4px solid #ef4444;">
+                                    <div style="display: flex; gap: 16px; align-items: start;">
+                                        <div class="task-checkbox"></div>
+                                        <div style="flex: 1;">
+                                            <div style="font-size: 16px; color: #111827; margin-bottom: 8px; font-weight: 500;">Review Q4 budget proposal</div>
+                                            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                                                <span class="objective-tag" style="background: #dbeafe; color: #1e40af;">Launch Product</span>
+                                                <span style="font-size: 14px; color: #ef4444; font-weight: 500;">Oct 28</span>
+                                            </div>
+                                        </div>
+                                        <button style="color: #6b7280; font-size: 20px; border: none; background: none; cursor: pointer;">⋮</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Due Today -->
+                            <div style="margin-bottom: 32px;">
+                                <h3 style="font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;">Due Today (2)</h3>
+
+                                <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 12px; border-left: 4px solid #3b82f6;">
+                                    <div style="display: flex; gap: 16px; align-items: start;">
+                                        <div class="task-checkbox"></div>
+                                        <div style="flex: 1;">
+                                            <div style="font-size: 16px; color: #111827; margin-bottom: 8px;">Update team on project status</div>
+                                            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                                                <span class="objective-tag" style="background: #dbeafe; color: #1e40af;">Launch Product</span>
+                                                <span style="font-size: 14px; color: #6b7280;">Today</span>
+                                            </div>
+                                        </div>
+                                        <button style="color: #6b7280; font-size: 20px; border: none; background: none; cursor: pointer;">⋮</button>
+                                    </div>
+                                </div>
+
+                                <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 4px solid #10b981;">
+                                    <div style="display: flex; gap: 16px; align-items: start;">
+                                        <div class="task-checkbox"></div>
+                                        <div style="flex: 1;">
+                                            <div style="font-size: 16px; color: #111827; margin-bottom: 8px;">Prepare slides for client meeting</div>
+                                            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                                                <span class="objective-tag" style="background: #d1fae5; color: #065f46;">Improve Health</span>
+                                                <span style="font-size: 14px; color: #6b7280;">Today</span>
+                                            </div>
+                                        </div>
+                                        <button style="color: #6b7280; font-size: 20px; border: none; background: none; cursor: pointer;">⋮</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- In Progress -->
+                            <div>
+                                <h3 style="font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;">In Progress (1)</h3>
+
+                                <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 4px solid #8b5cf6;">
+                                    <div style="display: flex; gap: 16px; align-items: start;">
+                                        <div class="task-checkbox"></div>
+                                        <div style="flex: 1;">
+                                            <div style="font-size: 16px; color: #111827; margin-bottom: 8px;">Design new landing page</div>
+                                            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                                                <span class="objective-tag" style="background: #ede9fe; color: #5b21b6;">Learn Design</span>
+                                                <span style="font-size: 14px; color: #3b82f6; font-weight: 600;">In Progress</span>
+                                            </div>
+                                        </div>
+                                        <button style="color: #6b7280; font-size: 20px; border: none; background: none; cursor: pointer;">⋮</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop - Objectives View -->
+        <div id="desktop-objectives" class="mockup-view mockup-container">
+            <div class="desktop-frame">
+                <div style="display: flex; height: 100%; background: #f9fafb;">
+                    <!-- Sidebar (same as Today view) -->
+                    <div style="width: 280px; background: white; border-right: 1px solid #e5e7eb; display: flex; flex-direction: column;">
+                        <div style="padding: 24px 20px; border-bottom: 1px solid #e5e7eb;">
+                            <div style="font-size: 24px; font-weight: 700; color: #111827;">LifeAlign</div>
+                        </div>
+
+                        <div style="padding: 16px 12px; flex: 1; overflow-y: auto;">
+                            <div style="margin-bottom: 20px;">
+                                <div style="padding: 10px 12px; color: #6b7280; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px;">
+                                    <span>📅</span>
+                                    <span>Today</span>
+                                    <span style="margin-left: auto; background: #e5e7eb; color: #6b7280; padding: 2px 8px; border-radius: 12px; font-size: 12px;">6</span>
+                                </div>
+                                <div style="padding: 10px 12px; color: #6b7280; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px;">
+                                    <span>📋</span>
+                                    <span>All Tasks</span>
+                                </div>
+                                <div style="padding: 10px 12px; color: #6b7280; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px;">
+                                    <span>📥</span>
+                                    <span>Inbox</span>
+                                    <span style="margin-left: auto; background: #e5e7eb; color: #6b7280; padding: 2px 8px; border-radius: 12px; font-size: 12px;">3</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div style="padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; background: #eff6ff; border-radius: 8px;">
+                                    <span style="font-size: 12px; font-weight: 600; color: #1e40af; text-transform: uppercase; letter-spacing: 0.5px;">Objectives</span>
+                                    <button style="color: #3b82f6; font-size: 16px; border: none; background: none; cursor: pointer; padding: 0; width: 20px; height: 20px;">+</button>
+                                </div>
+                                <div style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px;">
+                                    <div style="width: 8px; height: 8px; background: #3b82f6; border-radius: 2px;"></div>
+                                    <span style="color: #6b7280; font-size: 14px;">Launch Product</span>
+                                    <span style="margin-left: auto; font-size: 12px; color: #9ca3af;">8</span>
+                                </div>
+                                <div style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px;">
+                                    <div style="width: 8px; height: 8px; background: #10b981; border-radius: 2px;"></div>
+                                    <span style="color: #6b7280; font-size: 14px;">Improve Health</span>
+                                    <span style="margin-left: auto; font-size: 12px; color: #9ca3af;">5</span>
+                                </div>
+                                <div style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px;">
+                                    <div style="width: 8px; height: 8px; background: #8b5cf6; border-radius: 2px;"></div>
+                                    <span style="color: #6b7280; font-size: 14px;">Learn Design</span>
+                                    <span style="margin-left: auto; font-size: 12px; color: #9ca3af;">3</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="padding: 16px; border-top: 1px solid #e5e7eb;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="width: 40px; height: 40px; background: #dbeafe; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #1e40af;">JD</div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 14px; font-weight: 600; color: #111827;">John Doe</div>
+                                    <div style="font-size: 12px; color: #6b7280;">Settings</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div style="flex: 1; overflow-y: auto; padding: 40px;">
+                        <!-- Header -->
+                        <div style="margin-bottom: 40px; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h1 style="font-size: 36px; font-weight: 700; color: #111827; margin-bottom: 8px;">Objectives</h1>
+                                <p style="font-size: 16px; color: #6b7280;">3 active objectives • Track your strategic goals</p>
+                            </div>
+                            <button style="background: #3b82f6; color: white; padding: 12px 24px; border-radius: 10px; border: none; font-weight: 600; font-size: 15px; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);">
+                                <span style="font-size: 20px;">+</span>
+                                New Objective
+                            </button>
+                        </div>
+
+                        <!-- Objectives Grid -->
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+                            <!-- Objective Card 1 -->
+                            <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-top: 6px solid #3b82f6; cursor: pointer; transition: all 0.2s;">
+                                <div style="margin-bottom: 20px;">
+                                    <div style="font-size: 20px; font-weight: 600; color: #111827; margin-bottom: 8px;">Launch Product</div>
+                                    <div style="font-size: 14px; color: #6b7280; margin-bottom: 12px;">Oct 1 - Dec 31, 2025</div>
+                                    <div style="font-size: 13px; color: #6b7280; line-height: 1.6;">Successfully launch new product to market with full feature set and marketing campaign.</div>
+                                </div>
+                                <div style="margin-bottom: 16px;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 13px; color: #6b7280; margin-bottom: 8px;">
+                                        <span>Progress</span>
+                                        <span style="font-weight: 600; color: #3b82f6;">65%</span>
+                                    </div>
+                                    <div style="height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden;">
+                                        <div style="width: 65%; height: 100%; background: #3b82f6; transition: width 0.3s;"></div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div style="font-size: 13px; color: #6b7280;">
+                                        <span style="font-weight: 600; color: #111827; font-size: 16px;">8</span> tasks
+                                    </div>
+                                    <div style="font-size: 13px; color: #6b7280;">
+                                        <span style="font-weight: 600; color: #10b981;">5</span> complete
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Objective Card 2 -->
+                            <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-top: 6px solid #10b981; cursor: pointer; transition: all 0.2s;">
+                                <div style="margin-bottom: 20px;">
+                                    <div style="font-size: 20px; font-weight: 600; color: #111827; margin-bottom: 8px;">Improve Health</div>
+                                    <div style="font-size: 14px; color: #6b7280; margin-bottom: 12px;">Sep 15 - Nov 30, 2025</div>
+                                    <div style="font-size: 13px; color: #6b7280; line-height: 1.6;">Build consistent exercise routine and improve overall fitness and wellness.</div>
+                                </div>
+                                <div style="margin-bottom: 16px;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 13px; color: #6b7280; margin-bottom: 8px;">
+                                        <span>Progress</span>
+                                        <span style="font-weight: 600; color: #10b981;">40%</span>
+                                    </div>
+                                    <div style="height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden;">
+                                        <div style="width: 40%; height: 100%; background: #10b981; transition: width 0.3s;"></div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div style="font-size: 13px; color: #6b7280;">
+                                        <span style="font-weight: 600; color: #111827; font-size: 16px;">5</span> tasks
+                                    </div>
+                                    <div style="font-size: 13px; color: #6b7280;">
+                                        <span style="font-weight: 600; color: #10b981;">2</span> complete
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Objective Card 3 -->
+                            <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-top: 6px solid #8b5cf6; cursor: pointer; transition: all 0.2s;">
+                                <div style="margin-bottom: 20px;">
+                                    <div style="font-size: 20px; font-weight: 600; color: #111827; margin-bottom: 8px;">Learn Design</div>
+                                    <div style="font-size: 14px; color: #6b7280; margin-bottom: 12px;">Oct 10 - Dec 15, 2025</div>
+                                    <div style="font-size: 13px; color: #6b7280; line-height: 1.6;">Master UI/UX design principles and build portfolio of design projects.</div>
+                                </div>
+                                <div style="margin-bottom: 16px;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 13px; color: #6b7280; margin-bottom: 8px;">
+                                        <span>Progress</span>
+                                        <span style="font-weight: 600; color: #8b5cf6;">20%</span>
+                                    </div>
+                                    <div style="height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden;">
+                                        <div style="width: 20%; height: 100%; background: #8b5cf6; transition: width 0.3s;"></div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div style="font-size: 13px; color: #6b7280;">
+                                        <span style="font-weight: 600; color: #111827; font-size: 16px;">3</span> tasks
+                                    </div>
+                                    <div style="font-size: 13px; color: #6b7280;">
+                                        <span style="font-weight: 600; color: #10b981;">1</span> complete
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Add New Card -->
+                            <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 2px dashed #d1d5db; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 240px; cursor: pointer; transition: all 0.2s;">
+                                <div style="font-size: 48px; color: #d1d5db; margin-bottom: 12px;">+</div>
+                                <div style="font-size: 16px; font-weight: 600; color: #6b7280; text-align: center;">Add New Objective</div>
+                                <div style="font-size: 13px; color: #9ca3af; text-align: center; margin-top: 4px;">Define a new strategic goal</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop - All Tasks View -->
+        <div id="desktop-all" class="mockup-view mockup-container">
+            <div class="desktop-frame">
+                <div style="display: flex; height: 100%; background: #f9fafb;">
+                    <!-- Sidebar -->
+                    <div style="width: 280px; background: white; border-right: 1px solid #e5e7eb; display: flex; flex-direction: column;">
+                        <div style="padding: 24px 20px; border-bottom: 1px solid #e5e7eb;">
+                            <div style="font-size: 24px; font-weight: 700; color: #111827;">LifeAlign</div>
+                        </div>
+
+                        <div style="padding: 16px 12px; flex: 1; overflow-y: auto;">
+                            <div style="margin-bottom: 20px;">
+                                <div style="padding: 10px 12px; color: #6b7280; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px;">
+                                    <span>📅</span>
+                                    <span>Today</span>
+                                    <span style="margin-left: auto; background: #e5e7eb; color: #6b7280; padding: 2px 8px; border-radius: 12px; font-size: 12px;">6</span>
+                                </div>
+                                <div style="padding: 10px 12px; background: #eff6ff; border-radius: 8px; color: #1e40af; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+                                    <span>📋</span>
+                                    <span>All Tasks</span>
+                                </div>
+                                <div style="padding: 10px 12px; color: #6b7280; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px;">
+                                    <span>📥</span>
+                                    <span>Inbox</span>
+                                    <span style="margin-left: auto; background: #e5e7eb; color: #6b7280; padding: 2px 8px; border-radius: 12px; font-size: 12px;">3</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div style="padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Objectives</span>
+                                    <button style="color: #3b82f6; font-size: 16px; border: none; background: none; cursor: pointer; padding: 0; width: 20px; height: 20px;">+</button>
+                                </div>
+                                <div style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px;">
+                                    <div style="width: 8px; height: 8px; background: #3b82f6; border-radius: 2px;"></div>
+                                    <span style="color: #6b7280; font-size: 14px;">Launch Product</span>
+                                    <span style="margin-left: auto; font-size: 12px; color: #9ca3af;">8</span>
+                                </div>
+                                <div style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px;">
+                                    <div style="width: 8px; height: 8px; background: #10b981; border-radius: 2px;"></div>
+                                    <span style="color: #6b7280; font-size: 14px;">Improve Health</span>
+                                    <span style="margin-left: auto; font-size: 12px; color: #9ca3af;">5</span>
+                                </div>
+                                <div style="padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px;">
+                                    <div style="width: 8px; height: 8px; background: #8b5cf6; border-radius: 2px;"></div>
+                                    <span style="color: #6b7280; font-size: 14px;">Learn Design</span>
+                                    <span style="margin-left: auto; font-size: 12px; color: #9ca3af;">3</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="padding: 16px; border-top: 1px solid #e5e7eb;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="width: 40px; height: 40px; background: #dbeafe; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #1e40af;">JD</div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 14px; font-weight: 600; color: #111827;">John Doe</div>
+                                    <div style="font-size: 12px; color: #6b7280;">Settings</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div style="flex: 1; overflow-y: auto; padding: 40px;">
+                        <!-- Header -->
+                        <div style="margin-bottom: 32px;">
+                            <h1 style="font-size: 36px; font-weight: 700; color: #111827; margin-bottom: 8px;">All Tasks</h1>
+                            <div style="display: flex; gap: 16px; align-items: center;">
+                                <p style="font-size: 16px; color: #6b7280;">16 total tasks</p>
+                                <div style="display: flex; gap: 8px;">
+                                    <button style="padding: 8px 16px; background: white; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px; color: #6b7280; cursor: pointer;">All</button>
+                                    <button style="padding: 8px 16px; background: white; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px; color: #6b7280; cursor: pointer;">No Date</button>
+                                    <button style="padding: 8px 16px; background: white; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px; color: #6b7280; cursor: pointer;">Completed</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Add -->
+                        <div style="margin-bottom: 32px;">
+                            <div style="background: white; border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <span style="color: #3b82f6; font-size: 24px;">+</span>
+                                <input type="text" placeholder="Add a task... (Cmd+K)" style="flex: 1; border: none; outline: none; font-size: 16px; color: #111827;">
+                            </div>
+                        </div>
+
+                        <!-- Grouped Tasks -->
+                        <div>
+                            <!-- Launch Product Group -->
+                            <div style="margin-bottom: 32px;">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; cursor: pointer;">
+                                    <div style="width: 12px; height: 12px; background: #3b82f6; border-radius: 3px;"></div>
+                                    <h3 style="font-size: 16px; font-weight: 600; color: #111827;">Launch Product</h3>
+                                    <span style="font-size: 14px; color: #6b7280;">(8 tasks)</span>
+                                    <span style="margin-left: auto; font-size: 18px; color: #6b7280;">▼</span>
+                                </div>
+
+                                <div style="space-y: 12px;">
+                                    <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 12px; border-left: 4px solid #3b82f6;">
+                                        <div style="display: flex; gap: 16px; align-items: start;">
+                                            <div class="task-checkbox"></div>
+                                            <div style="flex: 1;">
+                                                <div style="font-size: 16px; color: #111827; margin-bottom: 8px;">Review Q4 budget proposal</div>
+                                                <div style="display: flex; align-items: center; gap: 12px;">
+                                                    <span style="font-size: 14px; color: #ef4444; font-weight: 500;">Oct 28 (overdue)</span>
+                                                </div>
+                                            </div>
+                                            <button style="color: #6b7280; font-size: 20px; border: none; background: none; cursor: pointer;">⋮</button>
+                                        </div>
+                                    </div>
+
+                                    <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 12px; border-left: 4px solid #3b82f6;">
+                                        <div style="display: flex; gap: 16px; align-items: start;">
+                                            <div class="task-checkbox"></div>
+                                            <div style="flex: 1;">
+                                                <div style="font-size: 16px; color: #111827; margin-bottom: 8px;">Update team on project status</div>
+                                                <div style="display: flex; align-items: center; gap: 12px;">
+                                                    <span style="font-size: 14px; color: #6b7280;">Today</span>
+                                                </div>
+                                            </div>
+                                            <button style="color: #6b7280; font-size: 20px; border: none; background: none; cursor: pointer;">⋮</button>
+                                        </div>
+                                    </div>
+
+                                    <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 12px; border-left: 4px solid #3b82f6;">
+                                        <div style="display: flex; gap: 16px; align-items: start;">
+                                            <div class="task-checkbox checked"></div>
+                                            <div style="flex: 1;">
+                                                <div style="font-size: 16px; color: #9ca3af; text-decoration: line-through; margin-bottom: 8px;">Finalize marketing materials</div>
+                                                <div style="display: flex; align-items: center; gap: 12px;">
+                                                    <span style="font-size: 14px; color: #9ca3af;">Oct 25</span>
+                                                </div>
+                                            </div>
+                                            <button style="color: #6b7280; font-size: 20px; border: none; background: none; cursor: pointer;">⋮</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Improve Health Group -->
+                            <div style="margin-bottom: 32px;">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; cursor: pointer;">
+                                    <div style="width: 12px; height: 12px; background: #10b981; border-radius: 3px;"></div>
+                                    <h3 style="font-size: 16px; font-weight: 600; color: #111827;">Improve Health</h3>
+                                    <span style="font-size: 14px; color: #6b7280;">(5 tasks)</span>
+                                    <span style="margin-left: auto; font-size: 18px; color: #6b7280;">▼</span>
+                                </div>
+
+                                <div>
+                                    <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 12px; border-left: 4px solid #10b981;">
+                                        <div style="display: flex; gap: 16px; align-items: start;">
+                                            <div class="task-checkbox"></div>
+                                            <div style="flex: 1;">
+                                                <div style="font-size: 16px; color: #111827; margin-bottom: 8px;">Prepare slides for client meeting</div>
+                                                <div style="display: flex; align-items: center; gap: 12px;">
+                                                    <span style="font-size: 14px; color: #6b7280;">Today</span>
+                                                </div>
+                                            </div>
+                                            <button style="color: #6b7280; font-size: 20px; border: none; background: none; cursor: pointer;">⋮</button>
+                                        </div>
+                                    </div>
+
+                                    <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 12px; border-left: 4px solid #10b981;">
+                                        <div style="display: flex; gap: 16px; align-items: start;">
+                                            <div class="task-checkbox"></div>
+                                            <div style="flex: 1;">
+                                                <div style="font-size: 16px; color: #111827; margin-bottom: 8px;">Morning workout routine</div>
+                                                <div style="display: flex; align-items: center; gap: 12px;">
+                                                    <span style="font-size: 14px; color: #6b7280;">Tomorrow</span>
+                                                </div>
+                                            </div>
+                                            <button style="color: #6b7280; font-size: 20px; border: none; background: none; cursor: pointer;">⋮</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showMockup(id) {
+            // Hide all mockups
+            document.querySelectorAll('.mockup-view').forEach(view => {
+                view.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected mockup
+            document.getElementById(id).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
